@@ -19,31 +19,36 @@ Uses
 #5 Clean Up when a component unmounts
 */
 
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
-function MyComponent(){
-
-    const[count,setCount] = useState(0);
-    const[color,setColor] = useState("green");
-    function addCount(){
-        setCount(c=>c+1)
-    }
-    function subCount(){
-        setCount(c=>c-1)
-    }
-    function changeColor(){
-        setColor(c=>c==="green"?"red":"green");
-    }
-    useEffect(()=>{ 
-        document.title = `Count:${count} ${color}`
-    },[count,color]) // Add [] this Empty arr of Dep help to not change the
-    // my title every time a click on count
-    return(<>
-        <p style={{color:color}}>Count:{count} {color}</p>
-        <button onClick={addCount}>Add</button>
-        <button onClick={subCount}>Sub</button>
-        <button onClick={changeColor}>Change Color</button>
-    </>)
+function MyComponent() {
+  const [count, setCount] = useState(0);
+  const [color, setColor] = useState("green");
+  function addCount() {
+    setCount((c) => c + 1);
+  }
+  function subCount() {
+    setCount((c) => c - 1);
+  }
+  function changeColor() {
+    setColor((c) => (c === "green" ? "red" : "green"));
+  }
+  useEffect(() => {
+    document.title = `Count:${count} ${color}`;
+  }, [count, color]); // Add [] this Empty arr of Dep help to not change the
+  // my title every time a click on count
+  // This Array of Dependencies stats that if even
+  // though any of this value change update it in the DOM
+  return (
+    <>
+      <p style={{ color: color }}>
+        Count:{count} {color}
+      </p>
+      <button onClick={addCount}>Add</button>
+      <button onClick={subCount}>Sub</button>
+      <button onClick={changeColor}>Change Color</button>
+    </>
+  );
 }
 
- export default MyComponent;
+export default MyComponent;
